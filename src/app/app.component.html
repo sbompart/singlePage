@@ -5,23 +5,6 @@
       <hr>
       <mat-accordion>
         <div *ngFor="let menu of menu">
-          <!-- <mat-expansion-panel *ngIf="menu.subMenu.length > 0" h1ideToggle="true">
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                <mat-icon> {{ menu.icon }} </mat-icon>
-              </mat-panel-title>
-              <mat-panel-description>
-                {{ menu.name }}
-              </mat-panel-description>
-            </mat-expansion-panel-header>
-            <mat-list>
-              <mat-list-item *ngFor="let subMenu of menu.subMenu" class="menu">
-                <mat-icon>{{ subMenu.icon }}</mat-icon>
-                <a routerLink="{{ subMenu.link }}" routerLinkActive="active">{{ subMenu.name }}</a>
-              </mat-list-item>
-            </mat-list>
-          </mat-expansion-panel> -->
-
           <div class="boxMenu">
             <mat-icon>{{ menu.icon }}</mat-icon>
             <a href="{{ menu.link }}" *ngIf="!menu.redirect">{{ menu.title }}</a>
@@ -32,9 +15,9 @@
     </mat-sidenav>
 
     <mat-toolbar color="accent">
-        <button type="button" mat-button (click)="sidenav.open()">
-            <mat-icon class="example-icon">menu</mat-icon>
-          </button>
+      <button type="button" mat-button (click)="sidenav.open()">
+        <mat-icon class="example-icon">menu</mat-icon>
+      </button>
       <span>{{ title }}</span>
       <span class="example-spacer-primary"></span>
       <!-- <mat-icon class="example-icon">account_circle</mat-icon> -->
