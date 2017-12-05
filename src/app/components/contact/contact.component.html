@@ -1,0 +1,47 @@
+<div>
+    <h3>{{ title }}</h3>
+    <mat-card class="example-card">
+        <form (ngSubmit)="onSubmit()" #heroForm="ngForm">
+            <mat-card-header>
+                <mat-card-title>Contact</mat-card-title>
+            </mat-card-header>
+
+            <mat-card-content>
+                <div class="example-container">
+                    <mat-form-field>
+                        <input [(ngModel)]="model.name" matInput placeholder="Name" required name="name">
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <input [(ngModel)]="model.observation" matInput placeholder="Observation" required name="observation">
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <input [(ngModel)]="model.phone" matInput placeholder="Phone" required name="phone">
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <mat-select placeholder="Motive" [(ngModel)]="model.motive" [formControl]="animalControl" required>
+                            <mat-option>-- Seleccione --</mat-option>
+                            <mat-option *ngFor="let motive of motives" [value]="motive">
+                                {{ motive }}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="animalControl.hasError('required')">Please choose an motive</mat-error>
+                        <mat-hint>{{animalControl.value?.sound}}</mat-hint>
+                    </mat-form-field>
+                    <!-- <div class="form-group">
+                        <label for="motive">Motivo</label>
+                        <select class="form-control" id="motive" required [(ngModel)]="model.motive" name="motive">
+                            <option *ngFor="let motive of motives" [value]="motive">{{ motive }}</option>
+                        </select>
+                    </div> -->
+                </div>
+            </mat-card-content>
+            <mat-card-actions align="end">
+                <button mat-raised-button color="primary" type="submit" [disabled]="!heroForm.form.valid">Save</button>
+                <button mat-raised-button color="accent" (click)="back()">Back</button>
+            </mat-card-actions>
+        </form>
+    </mat-card>
+</div>
