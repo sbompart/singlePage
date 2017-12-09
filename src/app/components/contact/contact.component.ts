@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
-/* import { strictEqual } from 'assert'; */
 import { Contact } from './contact';
-import { FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'contact',
@@ -13,20 +12,26 @@ export class ContactComponent {
     @Input() name: string;
     motives = ['consulta', 'servicios', 'productos', 'otros'];
     model;
-    animalControl = new FormControl('', [Validators.required]);
-    constructor() {
+    heroForm: FormGroup;
+
+    constructor(private fb: FormBuilder) {
       this.model = new Contact('', '', '', '');
       this.title = 'Ejemplo de Contacto';
+      this.createForm();
     }
-    get diagnostic() { return JSON.stringify(this.model); }
+    createForm() {
+      this.heroForm = this.fb.group({
+        name: ['', Validators.required],
+        observation: ['', Validators.required],
+        phone: ['', Validators.required],
+        motive: ['', Validators.required]
+      });
+    }
+    /* get diagnostic() { return JSON.stringify(this.model); } */
     onSubmit() {
       console.log('Guardar:D ', this.model);
     }
     back() {
       this.model = new Contact('', '', '', '');
-    }
-    showFormControls(form: any) {
-      return form && form.controls['name'] &&
-      form.controls['name'].value; // Dr. IQ
     }
 }
